@@ -38,6 +38,11 @@
             </snapshots>
             <url>https://oss.sonatype.org/content/repositories/snapshots/</url>
         </repository>
+        <repository>
+            <id>localLibs</id>
+            <name>localLibs</name>
+            <url>file:///${basedir}/libs</url>
+        </repository>
     </repositories>
 
     <dependencyManagement>
