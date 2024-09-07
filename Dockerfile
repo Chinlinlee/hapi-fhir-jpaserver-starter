@@ -6,6 +6,9 @@ RUN curl -LSsO https://github.com/open-telemetry/opentelemetry-java-instrumentat
 
 COPY pom.xml .
 COPY server.xml .
+COPY libs/ .
+RUN mvn install:install-file -Dfile=libs/ca/uhn/hapi/fhir/hapi-fhir-jpaserver-base/hapi-fhir-jpaserver-base-7.4.0.jar -DgroupId=ca.uhn.hapi.fhir -DartifactId=hapi-fhir-jpaserver-base -Dversion=7.4.0 -Dpackaging=jar
+
 RUN mvn -ntp dependency:go-offline
 
 COPY src/ /tmp/hapi-fhir-jpaserver-starter/src/
