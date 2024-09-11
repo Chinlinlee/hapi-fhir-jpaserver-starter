@@ -193,10 +193,15 @@ public class StarterJpaConfig {
 			AppProperties appProperties,
 			JobDefinition<ReindexJobParameters> reindexJobParametersJobDefinition,
 			JobDefinitionRegistry jobDefinitionRegistry,
-			IPackageInstallerSvc packageInstallerSvc) {
+			IPackageInstallerSvc packageInstallerSvc,
+			JpaStorageSettings jpaStorageSettings) {
 		jobDefinitionRegistry.addJobDefinitionIfNotRegistered(reindexJobParametersJobDefinition);
 
+
 		if (appProperties.getImplementationGuides() != null) {
+			jpaStorageSettings.setValidateResourceStatusForPackageUpload(
+				appProperties.getIs_validate_resource_status_for_package_upload()
+			);
 			Map<String, PackageInstallationSpec> guides = appProperties.getImplementationGuides();
 			for (Map.Entry<String, PackageInstallationSpec> guidesEntry : guides.entrySet()) {
 				PackageInstallationSpec packageInstallationSpec = guidesEntry.getValue();
@@ -276,6 +281,9 @@ public class StarterJpaConfig {
 			ThreadSafeResourceDeleterSvc theThreadSafeResourceDeleterSvc,
 			ApplicationContext appContext,
 			Optional<IpsOperationProvider> theIpsOperationProvider, Optional<IImplementationGuideOperationProvider> implementationGuideOperationProvider) {
+		jpaStorageSettings.setValidateResourceStatusForPackageUpload(
+			appProperties.getIs_validate_resource_status_for_package_upload()
+		);
 		RestfulServer fhirServer = new RestfulServer(fhirSystemDao.getContext());
 
 		List<String> supportedResourceTypes = appProperties.getSupported_resource_types();
@@ -398,7 +406,6 @@ public class StarterJpaConfig {
 		}
 
 		// Validation
-
 		if (validatorModule != null) {
 			if (appProperties.getValidation().getRequests_enabled()) {
 				RequestValidatingInterceptor interceptor = new RequestValidatingInterceptor();

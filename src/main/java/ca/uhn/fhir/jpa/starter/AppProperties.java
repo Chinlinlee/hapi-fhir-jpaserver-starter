@@ -73,6 +73,7 @@ public class AppProperties {
   private Boolean narrative_enabled = true;
 
   private Boolean ig_runtime_upload_enabled = false;
+  private Boolean is_validate_resource_status_for_package_upload = true;
 
   private Validation validation = new Validation();
   private Map<String, Tester> tester = null;
@@ -641,6 +642,14 @@ public Cors getCors() {
 
 	public void setLanguage_search_parameter_enabled(Boolean language_search_parameter_enabled) {
 		this.language_search_parameter_enabled = language_search_parameter_enabled;
+	}
+
+	public Boolean getIs_validate_resource_status_for_package_upload() {
+		return is_validate_resource_status_for_package_upload;
+	}
+
+	public void setIs_validate_resource_status_for_package_upload(Boolean is_validate_resource_status_for_package_upload) {
+		this.is_validate_resource_status_for_package_upload = is_validate_resource_status_for_package_upload;
 	}
 
 	public static class Cors {
