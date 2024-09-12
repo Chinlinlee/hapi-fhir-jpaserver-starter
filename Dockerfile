@@ -10,6 +10,7 @@ COPY libs/ /tmp/hapi-fhir-jpaserver-starter/libs/
 
 RUN mvn -ntp dependency:go-offline
 RUN mvn install:install-file -Dfile=libs/ca/uhn/hapi/fhir/hapi-fhir-jpaserver-base/hapi-fhir-jpaserver-base-7.4.0.jar -DgroupId=ca.uhn.hapi.fhir -DartifactId=hapi-fhir-jpaserver-base -Dversion=7.4.0 -Dpackaging=jar
+RUN mvn install:install-file -Dfile=libs/ca/uhn/hapi/fhir/hapi-fhir-validation/hapi-fhir-validation-7.4.0.jar -DgroupId=ca.uhn.hapi.fhir -DartifactId=hapi-fhir-validation -Dversion=7.4.0 -Dpackaging=jar
 
 COPY src/ /tmp/hapi-fhir-jpaserver-starter/src/
 RUN mvn clean install -DskipTests -Djdk.lang.Process.launchMechanism=vfork
